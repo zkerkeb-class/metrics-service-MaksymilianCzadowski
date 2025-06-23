@@ -1,5 +1,5 @@
-import { MonitoringService } from '../monitoring/monitoring.service';
-import { MetricsService } from '../metrics/metrics.service';
+import { MonitoringService } from "../monitoring/monitoring.service";
+import { MetricsService } from "../metrics/metrics.service";
 export declare class DashboardService {
     private readonly monitoringService;
     private readonly metricsService;

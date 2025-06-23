@@ -25,7 +25,7 @@ let MonitoringService = MonitoringService_1 = class MonitoringService {
         const metricsSummary = await this.metricsService.getMetricsSummary();
         return {
             timestamp: new Date().toISOString(),
-            status: healthSummary.summary.percentage >= 80 ? 'healthy' : 'degraded',
+            status: healthSummary.summary.percentage >= 80 ? "healthy" : "degraded",
             services: {
                 total: healthSummary.summary.total,
                 healthy: healthSummary.summary.healthy,
@@ -43,10 +43,10 @@ let MonitoringService = MonitoringService_1 = class MonitoringService {
         const healthSummary = await this.healthService.getHealthSummary();
         const alerts = [];
         for (const service of healthSummary.services) {
-            if (service.status === 'unhealthy') {
+            if (service.status === "unhealthy") {
                 alerts.push({
-                    severity: 'critical',
-                    type: 'service_down',
+                    severity: "critical",
+                    type: "service_down",
                     service: service.name,
                     message: `Service ${service.name} is unhealthy`,
                     timestamp: service.lastChecked,
@@ -55,8 +55,8 @@ let MonitoringService = MonitoringService_1 = class MonitoringService {
             }
             else if (service.responseTime > 5000) {
                 alerts.push({
-                    severity: 'warning',
-                    type: 'slow_response',
+                    severity: "warning",
+                    type: "slow_response",
                     service: service.name,
                     message: `Service ${service.name} has slow response time: ${service.responseTime}ms`,
                     timestamp: service.lastChecked,
@@ -67,9 +67,9 @@ let MonitoringService = MonitoringService_1 = class MonitoringService {
         const memoryUsagePercent = (memoryUsage.heapUsed / memoryUsage.heapTotal) * 100;
         if (memoryUsagePercent > 80) {
             alerts.push({
-                severity: 'warning',
-                type: 'high_memory_usage',
-                service: 'monitoring-service',
+                severity: "warning",
+                type: "high_memory_usage",
+                service: "monitoring-service",
                 message: `High memory usage: ${memoryUsagePercent.toFixed(1)}%`,
                 timestamp: new Date().toISOString(),
             });
@@ -77,12 +77,12 @@ let MonitoringService = MonitoringService_1 = class MonitoringService {
         return {
             timestamp: new Date().toISOString(),
             total: alerts.length,
-            critical: alerts.filter(a => a.severity === 'critical').length,
-            warnings: alerts.filter(a => a.severity === 'warning').length,
-            alerts: alerts.sort((a, b) => a.severity === 'critical' ? -1 : b.severity === 'critical' ? 1 : 0),
+            critical: alerts.filter((a) => a.severity === "critical").length,
+            warnings: alerts.filter((a) => a.severity === "warning").length,
+            alerts: alerts.sort((a, b) => a.severity === "critical" ? -1 : b.severity === "critical" ? 1 : 0),
         };
     }
-    async getPerformanceMetrics(timeRange = '1h') {
+    async getPerformanceMetrics(timeRange = "1h") {
         const healthSummary = await this.healthService.getHealthSummary();
         const avgResponseTime = healthSummary.services.reduce((sum, service) => sum + service.responseTime, 0) / healthSummary.services.length;
         return {
@@ -94,7 +94,7 @@ let MonitoringService = MonitoringService_1 = class MonitoringService {
                 uptime: process.uptime(),
                 memoryUsage: process.memoryUsage(),
             },
-            services: healthSummary.services.map(service => ({
+            services: healthSummary.services.map((service) => ({
                 name: service.name,
                 responseTime: service.responseTime,
                 status: service.status,
@@ -105,7 +105,7 @@ let MonitoringService = MonitoringService_1 = class MonitoringService {
         const healthSummary = await this.healthService.getHealthSummary();
         return {
             timestamp: new Date().toISOString(),
-            period: '24h',
+            period: "24h",
             statistics: {
                 totalServices: healthSummary.summary.total,
                 healthChecks: healthSummary.summary.total * 2880,
@@ -113,7 +113,7 @@ let MonitoringService = MonitoringService_1 = class MonitoringService {
                 alertsGenerated: (await this.getAlerts()).total,
             },
             breakdown: {
-                services: healthSummary.services.map(service => ({
+                services: healthSummary.services.map((service) => ({
                     name: service.name,
                     status: service.status,
                     lastChecked: service.lastChecked,

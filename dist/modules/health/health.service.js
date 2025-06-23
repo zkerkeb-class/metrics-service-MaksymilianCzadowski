@@ -20,22 +20,23 @@ let HealthService = HealthService_1 = class HealthService {
         this.httpService = httpService;
         this.configService = configService;
         this.logger = new common_1.Logger(HealthService_1.name);
+        this.services = [];
         this.services = [
             {
                 name: "auth-service",
-                url: "http://localhost:3002/api/v1/health",
+                url: `${this.configService.get("AUTH_SERVICE_URL", "http://auth-service:3002")}/api/v1/health`,
             },
             {
                 name: "db-service",
-                url: "http://localhost:3001/api/v1/health",
+                url: `${this.configService.get("DB_SERVICE_URL", "http://db-service:3001")}/api/v1/health`,
             },
             {
                 name: "ai-service",
-                url: "http://localhost:3003/api/v1/health",
+                url: `${this.configService.get("AI_SERVICE_URL", "http://ai-service:3003")}/api/v1/health`,
             },
             {
                 name: "payment-service",
-                url: "http://localhost:3004/api/v1/health",
+                url: `${this.configService.get("PAYMENT_SERVICE_URL", "http://payment-service:3004")}/api/v1/health`,
             },
         ];
     }

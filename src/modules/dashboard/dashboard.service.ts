@@ -1,12 +1,12 @@
-import { Injectable } from '@nestjs/common';
-import { MonitoringService } from '../monitoring/monitoring.service';
-import { MetricsService } from '../metrics/metrics.service';
+import { Injectable } from "@nestjs/common";
+import { MonitoringService } from "../monitoring/monitoring.service";
+import { MetricsService } from "../metrics/metrics.service";
 
 @Injectable()
 export class DashboardService {
   constructor(
     private readonly monitoringService: MonitoringService,
-    private readonly metricsService: MetricsService,
+    private readonly metricsService: MetricsService
   ) {}
 
   async getDashboardOverview() {
@@ -44,15 +44,15 @@ export class DashboardService {
       timestamp: new Date().toISOString(),
       widgets: [
         {
-          id: 'services-status',
-          title: 'Services Status',
-          type: 'status-grid',
+          id: "services-status",
+          title: "Services Status",
+          type: "status-grid",
           data: servicesMetrics.services,
         },
         {
-          id: 'health-summary',
-          title: 'Health Summary',
-          type: 'donut-chart',
+          id: "health-summary",
+          title: "Health Summary",
+          type: "donut-chart",
           data: {
             healthy: overview.services.healthy,
             unhealthy: overview.services.unhealthy,
@@ -60,18 +60,18 @@ export class DashboardService {
           },
         },
         {
-          id: 'response-times',
-          title: 'Response Times',
-          type: 'bar-chart',
-          data: servicesMetrics.services.map(service => ({
+          id: "response-times",
+          title: "Response Times",
+          type: "bar-chart",
+          data: servicesMetrics.services.map((service) => ({
             name: service.name,
             value: service.responseTime,
           })),
         },
         {
-          id: 'system-metrics',
-          title: 'System Metrics',
-          type: 'metrics-card',
+          id: "system-metrics",
+          title: "System Metrics",
+          type: "metrics-card",
           data: {
             uptime: Math.round(process.uptime() / 3600),
             memory: process.memoryUsage(),
@@ -95,7 +95,7 @@ export class DashboardService {
         timestamp: new Date().toISOString(),
         format,
         timeRange,
-        generatedBy: 'Penpal AI Monitoring Service',
+        generatedBy: "Penpal AI Monitoring Service",
       },
       data: {
         overview,
@@ -105,7 +105,7 @@ export class DashboardService {
       },
     };
 
-    if (format === 'csv') {
+    if (format === "csv") {
       return this.convertToCSV(exportData);
     }
 
@@ -115,17 +115,18 @@ export class DashboardService {
   private convertToCSV(data: any) {
     // Simple CSV conversion for services data
     const services = data.data.overview.services;
-    const csvHeader = 'Service,Status,Response Time (ms),Last Checked\n';
+    const csvHeader = "Service,Status,Response Time (ms),Last Checked\n";
     const csvRows = data.data.performance.services
-      .map(service => 
-        `${service.name},${service.status},${service.responseTime},${new Date().toISOString()}`
+      .map(
+        (service) =>
+          `${service.name},${service.status},${service.responseTime},${new Date().toISOString()}`
       )
-      .join('\n');
+      .join("\n");
 
     return {
-      format: 'csv',
+      format: "csv",
       content: csvHeader + csvRows,
-      filename: `penpal-monitoring-${new Date().toISOString().split('T')[0]}.csv`,
+      filename: `penpal-monitoring-${new Date().toISOString().split("T")[0]}.csv`,
     };
   }
-} 
+}

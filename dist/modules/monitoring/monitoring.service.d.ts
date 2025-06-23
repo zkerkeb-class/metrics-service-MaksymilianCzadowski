@@ -1,5 +1,5 @@
-import { HealthService } from '../health/health.service';
-import { MetricsService } from '../metrics/metrics.service';
+import { HealthService } from "../health/health.service";
+import { MetricsService } from "../metrics/metrics.service";
 export declare class MonitoringService {
     private readonly healthService;
     private readonly metricsService;

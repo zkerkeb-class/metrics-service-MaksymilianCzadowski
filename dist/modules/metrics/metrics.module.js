@@ -8,15 +8,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MetricsModule = void 0;
 const common_1 = require("@nestjs/common");
+const axios_1 = require("@nestjs/axios");
 const metrics_controller_1 = require("./metrics.controller");
 const metrics_service_1 = require("./metrics.service");
 const prometheus_service_1 = require("./prometheus.service");
+const health_module_1 = require("../health/health.module");
 let MetricsModule = class MetricsModule {
 };
 exports.MetricsModule = MetricsModule;
 exports.MetricsModule = MetricsModule = __decorate([
     (0, common_1.Module)({
-        controllers: [metrics_controller_1.MetricsController],
+        imports: [axios_1.HttpModule, health_module_1.HealthModule],
+        controllers: [metrics_controller_1.MetricsController, metrics_controller_1.MetricsApiController],
         providers: [metrics_service_1.MetricsService, prometheus_service_1.PrometheusService],
         exports: [metrics_service_1.MetricsService, prometheus_service_1.PrometheusService],
     })

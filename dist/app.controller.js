@@ -27,22 +27,28 @@ let AppController = class AppController {
 exports.AppController = AppController;
 __decorate([
     (0, common_1.Get)(),
-    (0, swagger_1.ApiOperation)({ summary: 'Get service information' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Service information retrieved successfully' }),
+    (0, swagger_1.ApiOperation)({ summary: "Get service information" }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: "Service information retrieved successfully",
+    }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], AppController.prototype, "getServiceInfo", null);
 __decorate([
-    (0, common_1.Get)('status'),
-    (0, swagger_1.ApiOperation)({ summary: 'Get monitoring service status' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Service status retrieved successfully' }),
+    (0, common_1.Get)("status"),
+    (0, swagger_1.ApiOperation)({ summary: "Get monitoring service status" }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: "Service status retrieved successfully",
+    }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], AppController.prototype, "getStatus", null);
 exports.AppController = AppController = __decorate([
-    (0, swagger_1.ApiTags)('monitoring'),
+    (0, swagger_1.ApiTags)("monitoring"),
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [app_service_1.AppService])
 ], AppController);

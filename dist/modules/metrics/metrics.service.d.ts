@@ -1,12 +1,14 @@
-import { HttpService } from '@nestjs/axios';
-import { PrometheusService } from './prometheus.service';
-import { HealthService } from '../health/health.service';
+import { HttpService } from "@nestjs/axios";
+import { ConfigService } from "@nestjs/config";
+import { PrometheusService } from "./prometheus.service";
+import { HealthService } from "../health/health.service";
 export declare class MetricsService {
     private readonly httpService;
     private readonly prometheusService;
     private readonly healthService;
+    private readonly configService;
     private readonly logger;
-    constructor(httpService: HttpService, prometheusService: PrometheusService, healthService: HealthService);
+    constructor(httpService: HttpService, prometheusService: PrometheusService, healthService: HealthService, configService: ConfigService);
     collectMetrics(): Promise<void>;
     private collectHealthMetrics;
     private collectBusinessMetrics;

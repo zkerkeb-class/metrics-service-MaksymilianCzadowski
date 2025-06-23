@@ -35,42 +35,46 @@ let MonitoringController = class MonitoringController {
 };
 exports.MonitoringController = MonitoringController;
 __decorate([
-    (0, common_1.Get)('overview'),
-    (0, swagger_1.ApiOperation)({ summary: 'Get overall system overview' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'System overview retrieved' }),
+    (0, common_1.Get)("overview"),
+    (0, swagger_1.ApiOperation)({ summary: "Get overall system overview" }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: "System overview retrieved" }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], MonitoringController.prototype, "getSystemOverview", null);
 __decorate([
-    (0, common_1.Get)('alerts'),
-    (0, swagger_1.ApiOperation)({ summary: 'Get current system alerts' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'System alerts retrieved' }),
+    (0, common_1.Get)("alerts"),
+    (0, swagger_1.ApiOperation)({ summary: "Get current system alerts" }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: "System alerts retrieved" }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], MonitoringController.prototype, "getAlerts", null);
 __decorate([
-    (0, common_1.Get)('performance'),
-    (0, swagger_1.ApiOperation)({ summary: 'Get performance metrics' }),
-    (0, swagger_1.ApiQuery)({ name: 'timeRange', required: false, description: 'Time range for metrics (1h, 24h, 7d)' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Performance metrics retrieved' }),
-    __param(0, (0, common_1.Query)('timeRange')),
+    (0, common_1.Get)("performance"),
+    (0, swagger_1.ApiOperation)({ summary: "Get performance metrics" }),
+    (0, swagger_1.ApiQuery)({
+        name: "timeRange",
+        required: false,
+        description: "Time range for metrics (1h, 24h, 7d)",
+    }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: "Performance metrics retrieved" }),
+    __param(0, (0, common_1.Query)("timeRange")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], MonitoringController.prototype, "getPerformanceMetrics", null);
 __decorate([
-    (0, common_1.Get)('usage'),
-    (0, swagger_1.ApiOperation)({ summary: 'Get usage statistics' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Usage statistics retrieved' }),
+    (0, common_1.Get)("usage"),
+    (0, swagger_1.ApiOperation)({ summary: "Get usage statistics" }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: "Usage statistics retrieved" }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], MonitoringController.prototype, "getUsageStatistics", null);
 exports.MonitoringController = MonitoringController = __decorate([
-    (0, swagger_1.ApiTags)('monitoring'),
-    (0, common_1.Controller)('monitoring'),
+    (0, swagger_1.ApiTags)("monitoring"),
+    (0, common_1.Controller)("monitoring"),
     __metadata("design:paramtypes", [monitoring_service_1.MonitoringService])
 ], MonitoringController);
 //# sourceMappingURL=monitoring.controller.js.map

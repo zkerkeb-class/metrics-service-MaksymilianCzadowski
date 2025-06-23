@@ -1,10 +1,14 @@
-import { MetricsService } from './metrics.service';
-import { PrometheusService } from './prometheus.service';
+import { MetricsService } from "./metrics.service";
+import { PrometheusService } from "./prometheus.service";
 export declare class MetricsController {
     private readonly metricsService;
     private readonly prometheusService;
     constructor(metricsService: MetricsService, prometheusService: PrometheusService);
     getMetrics(): Promise<string>;
+}
+export declare class MetricsApiController {
+    private readonly metricsService;
+    constructor(metricsService: MetricsService);
     getMetricsSummary(): Promise<{
         timestamp: string;
         health: {

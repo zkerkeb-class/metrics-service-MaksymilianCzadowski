@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
-import { DashboardController } from './dashboard.controller';
-import { DashboardService } from './dashboard.service';
-import { MonitoringModule } from '../monitoring/monitoring.module';
-import { MetricsModule } from '../metrics/metrics.module';
+import { Module } from "@nestjs/common";
+import { DashboardController } from "./dashboard.controller";
+import { DashboardService } from "./dashboard.service";
+import { MonitoringModule } from "../monitoring/monitoring.module";
+import { MetricsModule } from "../metrics/metrics.module";
 
 @Module({
   imports: [MonitoringModule, MetricsModule],
@@ -10,4 +10,4 @@ import { MetricsModule } from '../metrics/metrics.module';
   providers: [DashboardService],
   exports: [DashboardService],
 })
-export class DashboardModule {} 
+export class DashboardModule {}

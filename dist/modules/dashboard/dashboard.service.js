@@ -50,15 +50,15 @@ let DashboardService = class DashboardService {
             timestamp: new Date().toISOString(),
             widgets: [
                 {
-                    id: 'services-status',
-                    title: 'Services Status',
-                    type: 'status-grid',
+                    id: "services-status",
+                    title: "Services Status",
+                    type: "status-grid",
                     data: servicesMetrics.services,
                 },
                 {
-                    id: 'health-summary',
-                    title: 'Health Summary',
-                    type: 'donut-chart',
+                    id: "health-summary",
+                    title: "Health Summary",
+                    type: "donut-chart",
                     data: {
                         healthy: overview.services.healthy,
                         unhealthy: overview.services.unhealthy,
@@ -66,18 +66,18 @@ let DashboardService = class DashboardService {
                     },
                 },
                 {
-                    id: 'response-times',
-                    title: 'Response Times',
-                    type: 'bar-chart',
-                    data: servicesMetrics.services.map(service => ({
+                    id: "response-times",
+                    title: "Response Times",
+                    type: "bar-chart",
+                    data: servicesMetrics.services.map((service) => ({
                         name: service.name,
                         value: service.responseTime,
                     })),
                 },
                 {
-                    id: 'system-metrics',
-                    title: 'System Metrics',
-                    type: 'metrics-card',
+                    id: "system-metrics",
+                    title: "System Metrics",
+                    type: "metrics-card",
                     data: {
                         uptime: Math.round(process.uptime() / 3600),
                         memory: process.memoryUsage(),
@@ -99,7 +99,7 @@ let DashboardService = class DashboardService {
                 timestamp: new Date().toISOString(),
                 format,
                 timeRange,
-                generatedBy: 'Penpal AI Monitoring Service',
+                generatedBy: "Penpal AI Monitoring Service",
             },
             data: {
                 overview,
@@ -108,21 +108,21 @@ let DashboardService = class DashboardService {
                 usage,
             },
         };
-        if (format === 'csv') {
+        if (format === "csv") {
             return this.convertToCSV(exportData);
         }
         return exportData;
     }
     convertToCSV(data) {
         const services = data.data.overview.services;
-        const csvHeader = 'Service,Status,Response Time (ms),Last Checked\n';
+        const csvHeader = "Service,Status,Response Time (ms),Last Checked\n";
         const csvRows = data.data.performance.services
-            .map(service => `${service.name},${service.status},${service.responseTime},${new Date().toISOString()}`)
-            .join('\n');
+            .map((service) => `${service.name},${service.status},${service.responseTime},${new Date().toISOString()}`)
+            .join("\n");
         return {
-            format: 'csv',
+            format: "csv",
             content: csvHeader + csvRows,
-            filename: `penpal-monitoring-${new Date().toISOString().split('T')[0]}.csv`,
+            filename: `penpal-monitoring-${new Date().toISOString().split("T")[0]}.csv`,
         };
     }
 };

@@ -12,20 +12,20 @@ async function bootstrap() {
         transform: true,
     }));
     app.enableCors({
-        origin: ['http://localhost:3000', 'http://localhost:3002'],
+        origin: ["http://localhost:3000", "http://localhost:3002"],
         credentials: true,
     });
-    app.setGlobalPrefix('api/v1');
+    app.setGlobalPrefix("api/v1");
     const config = new swagger_1.DocumentBuilder()
-        .setTitle('Penpal AI Monitoring Service')
-        .setDescription('Service de monitoring et métriques pour l\'écosystème Penpal AI')
-        .setVersion('1.0')
-        .addTag('monitoring')
-        .addTag('metrics')
-        .addTag('health')
+        .setTitle("Penpal AI Monitoring Service")
+        .setDescription("Service de monitoring et métriques pour l'écosystème Penpal AI")
+        .setVersion("1.0")
+        .addTag("monitoring")
+        .addTag("metrics")
+        .addTag("health")
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, config);
-    swagger_1.SwaggerModule.setup('api/docs', app, document);
+    swagger_1.SwaggerModule.setup("api/docs", app, document);
     const port = process.env.PORT || 3005;
     await app.listen(port);
     console.log(`🚀 Penpal AI Monitoring Service is running on: http://localhost:${port}`);

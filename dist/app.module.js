@@ -26,7 +26,7 @@ exports.AppModule = AppModule = __decorate([
         imports: [
             config_1.ConfigModule.forRoot({
                 isGlobal: true,
-                envFilePath: ['.env.local', '.env'],
+                envFilePath: [".env.local", ".env"],
             }),
             schedule_1.ScheduleModule.forRoot(),
             terminus_1.TerminusModule,

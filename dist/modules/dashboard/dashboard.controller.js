@@ -26,42 +26,53 @@ let DashboardController = class DashboardController {
     async getWidgetsData() {
         return this.dashboardService.getWidgetsData();
     }
-    async exportData(format = 'json', timeRange = '24h') {
+    async exportData(format = "json", timeRange = "24h") {
         return this.dashboardService.exportData(format, timeRange);
     }
 };
 exports.DashboardController = DashboardController;
 __decorate([
-    (0, common_1.Get)('overview'),
-    (0, swagger_1.ApiOperation)({ summary: 'Get dashboard overview data' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Dashboard overview data retrieved' }),
+    (0, common_1.Get)("overview"),
+    (0, swagger_1.ApiOperation)({ summary: "Get dashboard overview data" }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: "Dashboard overview data retrieved",
+    }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], DashboardController.prototype, "getDashboardOverview", null);
 __decorate([
-    (0, common_1.Get)('widgets'),
-    (0, swagger_1.ApiOperation)({ summary: 'Get dashboard widget data' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Dashboard widgets data retrieved' }),
+    (0, common_1.Get)("widgets"),
+    (0, swagger_1.ApiOperation)({ summary: "Get dashboard widget data" }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: "Dashboard widgets data retrieved" }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], DashboardController.prototype, "getWidgetsData", null);
 __decorate([
-    (0, common_1.Get)('export'),
-    (0, swagger_1.ApiOperation)({ summary: 'Export monitoring data' }),
-    (0, swagger_1.ApiQuery)({ name: 'format', required: false, description: 'Export format (json, csv)' }),
-    (0, swagger_1.ApiQuery)({ name: 'timeRange', required: false, description: 'Time range for export' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Data exported successfully' }),
-    __param(0, (0, common_1.Query)('format')),
-    __param(1, (0, common_1.Query)('timeRange')),
+    (0, common_1.Get)("export"),
+    (0, swagger_1.ApiOperation)({ summary: "Export monitoring data" }),
+    (0, swagger_1.ApiQuery)({
+        name: "format",
+        required: false,
+        description: "Export format (json, csv)",
+    }),
+    (0, swagger_1.ApiQuery)({
+        name: "timeRange",
+        required: false,
+        description: "Time range for export",
+    }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: "Data exported successfully" }),
+    __param(0, (0, common_1.Query)("format")),
+    __param(1, (0, common_1.Query)("timeRange")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", Promise)
 ], DashboardController.prototype, "exportData", null);
 exports.DashboardController = DashboardController = __decorate([
-    (0, swagger_1.ApiTags)('dashboard'),
-    (0, common_1.Controller)('dashboard'),
+    (0, swagger_1.ApiTags)("dashboard"),
+    (0, common_1.Controller)("dashboard"),
     __metadata("design:paramtypes", [dashboard_service_1.DashboardService])
 ], DashboardController);
 //# sourceMappingURL=dashboard.controller.js.map

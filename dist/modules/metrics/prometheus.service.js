@@ -17,51 +17,51 @@ let PrometheusService = class PrometheusService {
         prom_client_1.register.clear();
         (0, prom_client_1.collectDefaultMetrics)({ register: prom_client_1.register });
         this.httpRequestsTotal = new prom_client_1.Counter({
-            name: 'http_requests_total',
-            help: 'Total number of HTTP requests',
-            labelNames: ['method', 'route', 'status_code', 'service'],
+            name: "http_requests_total",
+            help: "Total number of HTTP requests",
+            labelNames: ["method", "route", "status_code", "service"],
             registers: [prom_client_1.register],
         });
         this.httpRequestDuration = new prom_client_1.Histogram({
-            name: 'http_request_duration_seconds',
-            help: 'Duration of HTTP requests in seconds',
-            labelNames: ['method', 'route', 'service'],
+            name: "http_request_duration_seconds",
+            help: "Duration of HTTP requests in seconds",
+            labelNames: ["method", "route", "service"],
             buckets: [0.1, 0.5, 1, 2, 5, 10],
             registers: [prom_client_1.register],
         });
         this.serviceHealthStatus = new prom_client_1.Gauge({
-            name: 'service_health_status',
-            help: 'Health status of services (1 = healthy, 0 = unhealthy)',
-            labelNames: ['service_name', 'service_url'],
+            name: "service_health_status",
+            help: "Health status of services (1 = healthy, 0 = unhealthy)",
+            labelNames: ["service_name", "service_url"],
             registers: [prom_client_1.register],
         });
         this.serviceResponseTime = new prom_client_1.Gauge({
-            name: 'service_response_time_seconds',
-            help: 'Response time of service health checks in seconds',
-            labelNames: ['service_name'],
+            name: "service_response_time_seconds",
+            help: "Response time of service health checks in seconds",
+            labelNames: ["service_name"],
             registers: [prom_client_1.register],
         });
         this.activeUsers = new prom_client_1.Gauge({
-            name: 'penpal_active_users_total',
-            help: 'Number of active users in the system',
+            name: "penpal_active_users_total",
+            help: "Number of active users in the system",
             registers: [prom_client_1.register],
         });
         this.conversationsTotal = new prom_client_1.Counter({
-            name: 'penpal_conversations_total',
-            help: 'Total number of conversations created',
-            labelNames: ['status'],
+            name: "penpal_conversations_total",
+            help: "Total number of conversations created",
+            labelNames: ["status"],
             registers: [prom_client_1.register],
         });
         this.paymentsTotal = new prom_client_1.Counter({
-            name: 'penpal_payments_total',
-            help: 'Total number of payments processed',
-            labelNames: ['status', 'amount_range'],
+            name: "penpal_payments_total",
+            help: "Total number of payments processed",
+            labelNames: ["status", "amount_range"],
             registers: [prom_client_1.register],
         });
         this.tokensConsumed = new prom_client_1.Counter({
-            name: 'penpal_ai_tokens_consumed_total',
-            help: 'Total number of AI tokens consumed',
-            labelNames: ['provider', 'model'],
+            name: "penpal_ai_tokens_consumed_total",
+            help: "Total number of AI tokens consumed",
+            labelNames: ["provider", "model"],
             registers: [prom_client_1.register],
         });
     }
@@ -69,7 +69,12 @@ let PrometheusService = class PrometheusService {
         this.activeUsers.set(0);
     }
     incrementHttpRequests(method, route, statusCode, service) {
-        this.httpRequestsTotal.inc({ method, route, status_code: statusCode, service });
+        this.httpRequestsTotal.inc({
+            method,
+            route,
+            status_code: statusCode,
+            service,
+        });
     }
     observeHttpDuration(method, route, service, duration) {
         this.httpRequestDuration.observe({ method, route, service }, duration);
@@ -87,16 +92,16 @@ let PrometheusService = class PrometheusService {
         this.conversationsTotal.inc({ status });
     }
     incrementPayments(status, amount) {
-        let amountRange = 'unknown';
+        let amountRange = "unknown";
         if (amount !== undefined) {
             if (amount < 10)
-                amountRange = '0-10';
+                amountRange = "0-10";
             else if (amount < 50)
-                amountRange = '10-50';
+                amountRange = "10-50";
             else if (amount < 100)
-                amountRange = '50-100';
+                amountRange = "50-100";
             else
-                amountRange = '100+';
+                amountRange = "100+";
         }
         this.paymentsTotal.inc({ status, amount_range: amountRange });
     }

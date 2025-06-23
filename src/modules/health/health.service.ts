@@ -8,29 +8,32 @@ import { ServiceHealth } from "../../interfaces/service-health.interface";
 export class HealthService {
   private readonly logger = new Logger(HealthService.name);
 
-  private readonly services = [
-    {
-      name: "auth-service",
-      url: "http://localhost:3002/api/v1/health",
-    },
-    {
-      name: "db-service",
-      url: "http://localhost:3001/api/v1/health",
-    },
-    {
-      name: "ai-service",
-      url: "http://localhost:3003/api/v1/health",
-    },
-    {
-      name: "payment-service",
-      url: "http://localhost:3004/api/v1/health",
-    },
-  ];
+  private readonly services: Array<{ name: string; url: string }> = [];
 
   constructor(
     private readonly httpService: HttpService,
     private readonly configService: ConfigService
-  ) {}
+  ) {
+    // Initialize services with environment variables
+    this.services = [
+      {
+        name: "auth-service",
+        url: `${this.configService.get("AUTH_SERVICE_URL", "http://auth-service:3002")}/api/v1/health`,
+      },
+      {
+        name: "db-service",
+        url: `${this.configService.get("DB_SERVICE_URL", "http://db-service:3001")}/api/v1/health`,
+      },
+      {
+        name: "ai-service",
+        url: `${this.configService.get("AI_SERVICE_URL", "http://ai-service:3003")}/api/v1/health`,
+      },
+      {
+        name: "payment-service",
+        url: `${this.configService.get("PAYMENT_SERVICE_URL", "http://payment-service:3004")}/api/v1/health`,
+      },
+    ];
+  }
 
   async checkAllServices(): Promise<ServiceHealth[]> {
     const healthChecks = this.services.map((service) =>

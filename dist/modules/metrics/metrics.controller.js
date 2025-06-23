@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MetricsController = void 0;
+exports.MetricsApiController = exports.MetricsController = void 0;
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
 const metrics_service_1 = require("./metrics.service");
@@ -22,6 +22,27 @@ let MetricsController = class MetricsController {
     async getMetrics() {
         return this.prometheusService.getMetrics();
     }
+};
+exports.MetricsController = MetricsController;
+__decorate([
+    (0, common_1.Get)("metrics"),
+    (0, common_1.Header)("Content-Type", "text/plain; version=0.0.4; charset=utf-8"),
+    (0, swagger_1.ApiOperation)({ summary: "Get Prometheus metrics" }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: "Prometheus metrics returned" }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], MetricsController.prototype, "getMetrics", null);
+exports.MetricsController = MetricsController = __decorate([
+    (0, swagger_1.ApiTags)("metrics"),
+    (0, common_1.Controller)(),
+    __metadata("design:paramtypes", [metrics_service_1.MetricsService,
+        prometheus_service_1.PrometheusService])
+], MetricsController);
+let MetricsApiController = class MetricsApiController {
+    constructor(metricsService) {
+        this.metricsService = metricsService;
+    }
     async getMetricsSummary() {
         return this.metricsService.getMetricsSummary();
     }
@@ -29,36 +50,26 @@ let MetricsController = class MetricsController {
         return this.metricsService.getServicesMetrics();
     }
 };
-exports.MetricsController = MetricsController;
+exports.MetricsApiController = MetricsApiController;
 __decorate([
-    (0, common_1.Get)('metrics'),
-    (0, common_1.Header)('Content-Type', 'text/plain; version=0.0.4; charset=utf-8'),
-    (0, swagger_1.ApiOperation)({ summary: 'Get Prometheus metrics' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Prometheus metrics returned' }),
+    (0, common_1.Get)("summary"),
+    (0, swagger_1.ApiOperation)({ summary: "Get metrics summary in JSON format" }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: "Metrics summary retrieved" }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], MetricsController.prototype, "getMetrics", null);
+], MetricsApiController.prototype, "getMetricsSummary", null);
 __decorate([
-    (0, common_1.Get)('api/v1/metrics/summary'),
-    (0, swagger_1.ApiOperation)({ summary: 'Get metrics summary in JSON format' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Metrics summary retrieved' }),
+    (0, common_1.Get)("services"),
+    (0, swagger_1.ApiOperation)({ summary: "Get metrics for all services" }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: "Services metrics retrieved" }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], MetricsController.prototype, "getMetricsSummary", null);
-__decorate([
-    (0, common_1.Get)('api/v1/metrics/services'),
-    (0, swagger_1.ApiOperation)({ summary: 'Get metrics for all services' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Services metrics retrieved' }),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], MetricsController.prototype, "getServicesMetrics", null);
-exports.MetricsController = MetricsController = __decorate([
-    (0, swagger_1.ApiTags)('metrics'),
-    (0, common_1.Controller)(),
-    __metadata("design:paramtypes", [metrics_service_1.MetricsService,
-        prometheus_service_1.PrometheusService])
-], MetricsController);
+], MetricsApiController.prototype, "getServicesMetrics", null);
+exports.MetricsApiController = MetricsApiController = __decorate([
+    (0, swagger_1.ApiTags)("metrics"),
+    (0, common_1.Controller)("metrics"),
+    __metadata("design:paramtypes", [metrics_service_1.MetricsService])
+], MetricsApiController);
 //# sourceMappingURL=metrics.controller.js.map

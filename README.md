@@ -110,12 +110,14 @@ docker run -p 3005:3005 penpal-monitoring-service
 ## 📈 Métriques collectées
 
 ### Métriques système
+
 - `http_requests_total` - Nombre total de requêtes HTTP
 - `http_request_duration_seconds` - Durée des requêtes HTTP
 - `service_health_status` - Statut de santé des services
 - `service_response_time_seconds` - Temps de réponse des services
 
 ### Métriques business
+
 - `penpal_active_users_total` - Utilisateurs actifs
 - `penpal_conversations_total` - Conversations créées
 - `penpal_payments_total` - Paiements traités
@@ -166,7 +168,7 @@ monitoring-service:
     target: development
   container_name: penpal-ai-monitoring-service
   ports:
-    - '3005:3005'
+    - "3005:3005"
   volumes:
     - ../../penpal-ai-monitoring-service:/app
     - /app/node_modules
@@ -214,6 +216,7 @@ src/
 ## 📝 Logs
 
 Logs structurés avec niveaux :
+
 - `error` - Erreurs critiques
 - `warn` - Avertissements
 - `info` - Informations générales
@@ -223,12 +226,12 @@ Logs structurés avec niveaux :
 
 Variables d'environnement principales :
 
-| Variable | Description | Défaut |
-|----------|-------------|---------|
-| `PORT` | Port du service | `3005` |
-| `NODE_ENV` | Environnement | `development` |
-| `METRICS_COLLECTION_INTERVAL` | Intervalle collecte (ms) | `30000` |
-| `HEALTH_CHECK_TIMEOUT` | Timeout health checks (ms) | `5000` |
+| Variable                      | Description                | Défaut        |
+| ----------------------------- | -------------------------- | ------------- |
+| `PORT`                        | Port du service            | `3005`        |
+| `NODE_ENV`                    | Environnement              | `development` |
+| `METRICS_COLLECTION_INTERVAL` | Intervalle collecte (ms)   | `30000`       |
+| `HEALTH_CHECK_TIMEOUT`        | Timeout health checks (ms) | `5000`        |
 
 ## 🤝 Contribution
 
@@ -239,4 +242,4 @@ Variables d'environnement principales :
 
 ## 📄 License
 
-Propriétaire - Penpal AI Team 
+Propriétaire - Penpal AI Team
